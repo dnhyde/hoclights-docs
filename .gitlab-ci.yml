@@ -3,8 +3,7 @@
 pages:
   stage: deploy
   script:
-  - mkdir public
-  - mv build/html/* public
+  - echo "Nothing to do..."
   artifacts:
     paths:
     - public
