@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation &mdash; hoclights 1.0.3 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluation" href="../evaluation/evaluation.html" />
+    <link rel="prev" title="Architecture" href="../design/architecture.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> hoclights
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro/intro.html">What is hoclights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design/index.html">Design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#which-technlogies-and-why">Which technlogies and why?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#frontend">Frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#backend">Backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#raspberry-pi-settings">Raspberry Pi Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backend-archtecture">Backend Archtecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zeroconf-bonjour-mdns">ZeroConf Bonjour mDNS</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation.html">Evaluation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hoclights</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Implementation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/implementation/implementation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation">
+<h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h1>
+<p>This chapter goes through hoclights implementation in details.</p>
+<div class="section" id="which-technlogies-and-why">
+<h2>Which technlogies and why?<a class="headerlink" href="#which-technlogies-and-why" title="Permalink to this headline">¶</a></h2>
+<p>Hoclights went through a set of technological approaches. First it was implemented as a native mobile application using <a class="reference external" href="https://facebook.github.io/react-native/">React Native</a>, then we attempted of building an Android Native Application written in Java. In the end we opted for a mobile web-app for one main reason: its portability. Indeed by creating a web-app we are OS-independant. iOS development without an account is limited to only 3 devices for testing purposes per year, and to our opinion it is a very severe limitation.</p>
+<div class="section" id="frontend">
+<h3>Frontend<a class="headerlink" href="#frontend" title="Permalink to this headline">¶</a></h3>
+<p>We discovered <a class="reference external" href="https://vuejs.org/">Vue</a>, an open source javascript framework that makes code writing seamless and clear. It is so modular that maintaining the code base is almost a pleasure. For this reason we opted to develop the web-app in javascript, integrating Vue framework and following its best practices.</p>
+<p>The style of our web-app is created using a <em>pure CSS</em> frameword named <a class="reference external" href="https://bulma.io/">Bulma</a>. Bulma is a young framework based on flexbox. At the beginning its primitive may seem unfamiliar, but in very few time you can get used to them and leverage all Bulma’s power.</p>
+<p>A complete JSDoc style documentation of the frontend is availabe in the project repository.</p>
+</div>
+<div class="section" id="backend">
+<h3>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h3>
+<p>Since we needed to host our web-app somewhere a backend was necessary. Instead of useing a cloud provider, we decided to flash raspian stretch on a raspberry pi 3 model B. The main reason for such a choice is that the rpi is advertized on the local network and has access to a very useful feature for hoclights: <a class="reference external" href="./implementation.html#zeroconf-bonjour-mdns">the mDNS and DNSsd feature</a>.</p>
+<p>We chose to implement our backend in Node.js to use a single language (javascript) for full-stack development. At the same time Node.js offers a rich package manager such as <cite>npm</cite> and has very useful plugins such as <a class="reference external" href="http://expressjs.com/">Express</a> that bootstrap server-side code implementation.
+The full documentation for the backend can be found in the project repository.</p>
+</div>
+</div>
+<div class="section" id="raspberry-pi-settings">
+<h2>Raspberry Pi Settings<a class="headerlink" href="#raspberry-pi-settings" title="Permalink to this headline">¶</a></h2>
+<p>The rpi 3 Model B is equipped with:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Raspian Stretch v4.14 (2018-04-18)</li>
+<li>Node.js v8.11.3 LTS</li>
+<li>Nginx 1.10.3</li>
+</ul>
+</div></blockquote>
+<p>Node act as middleware exposing two main endpoinds: <code class="code docutils literal notranslate"><span class="pre">/node/mdns</span></code> and <code class="code docutils literal notranslate"><span class="pre">/node/forward/:paramResponderIpAddr</span></code>. The former response is a list of responders that were discovered through the mdns search, the latter is a forwarder that takes into account to send the requests to the target responder based on the provided ip address as paramter.</p>
+<p><strong>Why an endpoint to forward such requests?</strong></p>
+<p>Short answer: <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>. Some responders (e.g. wemos) work at low level and should not bear the burden of http madness. For this reason we delegate the http traffic to our Node middleware.</p>
+<p><strong>Why Nginx then?</strong></p>
+<p>Node is listening on port <code class="code docutils literal notranslate"><span class="pre">3000</span></code> (or any custom port specified by the developer), anyway having Node to listen on port :80 is not so easy. The best approach is to use a <a class="reference external" href="https://www.nginx.com/resources/glossary/reverse-proxy-server/">reverse proxy</a>. We configured Nginx to listen on port <code class="code docutils literal notranslate"><span class="pre">:80</span></code> and host our web-app.</p>
+<p>Meaning that if you visit the rpi ip address (or its local dns - in our case raspberrylights.local) in the same local network you will see hoclights Vue frontend. i.e. if you go the root endpoint you see the web-app <code class="code docutils literal notranslate"><span class="pre">/</span></code>. For example by visiting <code class="code docutils literal notranslate"><span class="pre">192.168.0.2</span></code> or equivalently <code class="code docutils literal notranslate"><span class="pre">http://raspberrylights.local/</span></code>.
+To reach our backend at the specified ip we had to specify a <a class="reference external" href="https://www.raspberrypi.org/learning/networking-lessons/rpi-static-ip-address/">static ip address</a> that is assigned to our rpi in the network. We preferred the static ip address to the local dns name because some browsers (chrome and firefox) may use an internal dns resolver instead of the OS one to resolve <code class="code docutils literal notranslate"><span class="pre">.local</span></code> domains.</p>
+<p>To configure nginx we changed its configurtation under <code class="code bash docutils literal notranslate"><span class="pre">/etc/nginx/sites-available/default</span></code>. Tested the config with <code class="code bash docutils literal notranslate"><span class="pre">nginx</span> <span class="pre">-t</span></code> and reload nginx with <code class="code bash docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">nginx</span> <span class="pre">reload</span></code>. <a class="reference external" href="https://github.com/pdroll/Raspberry-Pi-Node-Server">This repository</a> is quite old, but explains step by step most of the work to setup the rpi with node and nginx.</p>
+<p><strong>Starting Node</strong></p>
+<p>Once that our node backend is in place it can be started with the classical node application command: <code class="code bash docutils literal notranslate"><span class="pre">node</span> <span class="pre">index.js</span></code>. To start node automatically we had to create a service. We created the hoclights service following <a class="reference external" href="https://www.paulaikman.co.uk/nodejs-services-raspberrypi/">this guide</a>. Hoclights service is stored under <code class="code bash docutils literal notranslate"><span class="pre">/lib/systemd/system</span></code>. Please notice that any change to the service file, <code class="code bash docutils literal notranslate"><span class="pre">hoclights.service</span></code>, require a root restart of the daemon systemctl with <code class="code bash docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code>.</p>
+<p>The Node backend is reachable from its dedicated endpoint: <code class="code docutils literal notranslate"><span class="pre">/node</span></code></p>
+</div>
+<div class="section" id="backend-archtecture">
+<h2>Backend Archtecture<a class="headerlink" href="#backend-archtecture" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The backend has Nginx as entry point that acts as reverse proxy with two endpoints:</dt>
+<dd><ul class="first last simple">
+<li>root <code class="code docutils literal notranslate"><span class="pre">/</span></code>: host the production static build of the web-app.</li>
+<li>node <code class="code docutils literal notranslate"><span class="pre">/node</span></code>: sneds requests to the node.js middleware running behind the nginx reverse proxy.</li>
+</ul>
+</dd>
+</dl>
+<p>We could have hosted our Vue web-app directly on node server using <a class="reference external" href="http://expressjs.com/en/starter/static-files.html">Express static function</a>. But for a much ordered architecture we decided to host our web-app on nginx and use ngnx as reverse proxy to avoid CORS. The backend architectural choice is reported in the figure below.</p>
+<div class="align-center figure" id="id1">
+<img alt="alternate text" src="../_images/hoclights-backend-architecture.png" />
+<p class="caption"><span class="caption-text">Hoclights backend implementation.</span></p>
+</div>
+<p>For development we duplicated an identical architecture on the dev machine. Using this approach we only need to change one single endpoint from dev to prod (i.e. <code class="code docutils literal notranslate"><span class="pre">192.168.0.2/node</span></code> to <code class="code docutils literal notranslate"><span class="pre">localhost:8081/node</span></code>). During development we have the Vue app running on <code class="code docutils literal notranslate"><span class="pre">localhost:8080</span></code> reverse proxied by nginx running on <code class="code docutils literal notranslate"><span class="pre">localhost:8081</span></code> and our node server runnning on <code class="code docutils literal notranslate"><span class="pre">localhost:3000</span></code> reverse proxied by nginx through <code class="code docutils literal notranslate"><span class="pre">localhost:8081/node</span></code>.</p>
+</div>
+<div class="section" id="zeroconf-bonjour-mdns">
+<h2>ZeroConf Bonjour mDNS<a class="headerlink" href="#zeroconf-bonjour-mdns" title="Permalink to this headline">¶</a></h2>
+<p>Differently from the middleware (rpi 3 with Node) we cannot ask a static ip address for every responder. In case of many smart-objects controlled by many responders our system would not be scalable.
+For this reason we implemented the multicast DNS discovery, a feature that allows devices to broadcast their dns information. On top of it, the dns-sd: dns-service_discovery, allows to advertise a specific service that is offered by the respnder. For example Google Chromecasts use this feature to “show” themselves to nearby smartphones.</p>
+<p>In our particular case we used the following <a class="reference external" href="https://www.npmjs.com/package/dnssd">npm package</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">the dnssd package works flawlwssly on rpi. However it is not able to finish the mdns discovery directly on OSX (probably because it requires to have mdns installed on the OS stack.)</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">There is a workaround the the above warning. The dnssd is able to perform the discovery if another device doing the mdns reqests is present on the same network.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../evaluation/evaluation.html" class="btn btn-neutral float-right" title="Evaluation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../design/architecture.html" class="btn btn-neutral" title="Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, dnhyde.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
