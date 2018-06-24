@@ -3,9 +3,10 @@
 pages:
   stage: deploy
   script:
-  - echo 'Nothing to do...'
+  - mkdir public
+  - mv build/html/* public
   artifacts:
     paths:
-    - build/html
+    - public
   only:
   - master
